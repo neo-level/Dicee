@@ -14,20 +14,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var DiceImageViewLeft: UIImageView!
     @IBOutlet weak var DiceImageViewRight: UIImageView!
     
-    var dices = [ UIImage(named: "DiceOne"),
+    let dicee = [ UIImage(named: "DiceOne"),
                   UIImage(named: "DiceTwo"),
                   UIImage(named: "DiceThree"),
                   UIImage(named: "DiceFour"),
                   UIImage(named: "DiceFive"),
                   UIImage(named: "DiceSix") ]
     
-    var leftDiceNumber = 1
-    var rightDiceNumber = 5
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    @IBAction func RollButtonPressed(_ sender: UIButton) {
+        if let leftImage = getRandomDice(),
+           let rightImage = getRandomDice() {
+            DiceImageViewLeft.image = leftImage
+            DiceImageViewRight.image = rightImage
+        }
+    }
     
+    /**
+     This function returns a random image from the dice array.
+     - Returns: A 'UIImage' instance if the image can be retrieved, otherwise a blank image will be provided.
+     */
+    func getRandomDice() -> UIImage? {
+        if let image = dicee.randomElement() {
+            return image
+        }
+        return UIImage()
+    }
 }
 
